@@ -1,5 +1,25 @@
-angular.module('NgBookApp', [])
-  .controller('MyController', function($scope, $timeout, $parse, $interpolate) {
+angular.module('emailParser', [])
+  .config(['$interpolateProvider',
+    function($interpolateProvider) {
+      // here it will applied for all app
+      $interpolateProvider.startSymbol('__');
+      $interpolateProvider.endSymbol('__');
+    }])
+  .factory('EmailParser', ['$interpolate',
+    function($interpolate) {
+      // a service to handle parsing
+      return {
+        parse: function(text, context) {
+          var template = $interpolate(text);
+          return template(context);
+        }
+      }
+    }]);
+
+angular.module('NgBookApp', ['emailParser'])
+  .controller('MyController',
+      ['$scope', '$timeout', '$parse', '$interpolate', 'EmailParser',
+      function($scope, $timeout, $parse, $interpolate, EmailParser) {
     $scope.clock = {};
     $scope.counter = 0;
 
@@ -30,5 +50,11 @@ angular.module('NgBookApp', [])
         $scope.previewText = template({ to: $scope.to });
       }
     });
+    $scope.$watch('emailBody', function(body) {
+      if (body) {
+        var template = $interpolate(body);
+        $scope.previewTextCustom = EmailParser.parse(body, { to: $scope.to });
+      }
+    });
 
-  });
+  }]);
