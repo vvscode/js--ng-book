@@ -1,5 +1,5 @@
 angular.module('NgBookApp', [])
-  .controller('MyController', function($scope, $timeout) {
+  .controller('MyController', function($scope, $timeout, $parse) {
     $scope.clock = {};
     $scope.counter = 0;
 
@@ -9,6 +9,12 @@ angular.module('NgBookApp', [])
     $scope.subtract = function(amount) {
       $scope.counter -= amount;
     };
+    $scope.$watch('expr', function(newVal, oldVal, scope) {
+      if(newVal != oldVal) {
+        var parseFun = $parse(newVal);
+        $scope.parsedValue = parseFun(scope);
+      }
+    });
 
     var updateClock = function() {
       $scope.clock.now = new Date();
