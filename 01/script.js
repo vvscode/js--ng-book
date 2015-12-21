@@ -1,5 +1,5 @@
 angular.module('NgBookApp', [])
-  .controller('MyController', function($scope, $timeout, $parse) {
+  .controller('MyController', function($scope, $timeout, $parse, $interpolate) {
     $scope.clock = {};
     $scope.counter = 0;
 
@@ -10,7 +10,7 @@ angular.module('NgBookApp', [])
       $scope.counter -= amount;
     };
     $scope.$watch('expr', function(newVal, oldVal, scope) {
-      if(newVal != oldVal) {
+      if (newVal != oldVal) {
         var parseFun = $parse(newVal);
         $scope.parsedValue = parseFun(scope);
       }
@@ -23,5 +23,12 @@ angular.module('NgBookApp', [])
       }, 1000);
     };
     updateClock();
+
+    $scope.$watch('emailBody', function(body) {
+      if (body) {
+        var template = $interpolate(body);
+        $scope.previewText = template({ to: $scope.to });
+      }
+    });
 
   });

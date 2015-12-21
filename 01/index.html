@@ -16,6 +16,11 @@
   <h3>Expression and $parse</h3>
   <input ng-model="expr" placeholder="Enter an expression" />
   <h3>{{ parsedValue }}</h3>
+  <hr />
+  <input ng-model="to" type="email" placeholder="Recipient" />
+  <textarea ng-model="emailBody"></textarea>
+  <h3>{{ to }}</h3>
+  <pre>{{ previewText }}</pre>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 <script src="script.js"></script>
