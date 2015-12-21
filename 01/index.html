@@ -9,6 +9,7 @@
   <input ng-model="name" type="text" placeholder="Your name">
   <h1>Hello {{ name }}</h1>
   <h2>{{ clock.now }}</h2>
+  <h3>{{ counter }} <button ng-click="add(1);">+</button><button ng-click="subtract(1)">-</button></h3>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 <script src="script.js"></script>
