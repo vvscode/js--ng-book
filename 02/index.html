@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NgBookApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Intro</title>
+</head>
+<body>
+<div ng-controller="MyController">
+  {{ name }}
+  {{ 123.45678 | number: 2}}
+  {{ 123 | currency }}
+  <h2>Date filters</h2>
+  {{ today | date:'medium' }} <!-- Aug 09, 2013 12:09:02 PM --><br/>
+  {{ today | date:'short' }} <!-- 8/9/13 12:09 PM --><br/>
+  {{ today | date:'fullDate' }} <!-- Thursday, August 09, 2013 --><br/>
+  {{ today | date:'longDate' }} <!-- August 09, 2013 --><br/>
+  {{ today | date:'mediumDate' }} <!-- Aug 09, 2013 --><br/>
+  {{ today | date:'shortDate' }} <!-- 8/9/13 --><br/>
+  {{ today | date:'mediumTime' }} <!-- 12:09:02 PM --><br/>
+  {{ today | date:'shortTime' }} <!-- 12:09 PM --><br/>
+  <h3>Year Formatting</h3>
+  1 Four-digit year: {{ today | date:'yyyy' }} <!-- 2013 --><br/>
+  2 Two-digit padded year: {{ today | date:'yy' }} <!-- 13 --><br/>
+  3 One-digit year: {{ today | date:'y' }} <!-- 2013 --><br/>
+  <h3>Month Formatting</h3>
+  1 Month in year: {{ today | date:'MMMM' }} <!-- August --><br/>
+  2 Short month in year: {{ today | date:'MMM' }} <!-- Aug --><br/>
+  3 Padded month in year: {{ today | date:'MM' }} <!-- 08 --><br/>
+  4 Month in year: {{ today | date:'M' }} <!-- 8 --><br/>
+  <h3>Day Formatting</h3>
+  1 Padded day in month: {{ today | date:'dd' }} <!-- 09 --><br/>
+  2 Day in month: {{ today | date:'d' }} <!-- 9 --><br/>
+  3 Day in week: {{ today | date:'EEEE' }} <!-- Thursday --><br/>
+  4 Short day in week: {{ today | date:'EEE' }} <!-- Thu --><br/>
+  <h3>Hour Formatting</h3>
+  1 Padded hour in day: {{ today | date:'HH' }} <!-- 00 --><br/>
+  2 Hour in day: {{ today | date:'H' }} <!-- 0 --><br/>
+  3 Padded hour in am/pm: {{ today | date:'hh' }} <!-- 12 --><br/>
+  4 Hour in am/pm: {{ today | date:'h' }} <!-- 12 --><br/>
+  <h3>Minute Formatting</h3>
+  1 Padded minute in hour: {{ today | date:'mm' }} <!-- 09 --><br/>
+  2 Minute in hour: {{ today | date:'m' }} <!-- 9 --><br/>
+  <h3>Second Formatting</h3>
+  1 Padded second in minute: {{ today | date:'ss' }} <!-- 02 --><br/>
+  2 Second in minute: {{ today | date:'s' }} <!-- 2 --><br/>
+  3 Padded millisecond in second: {{ today | date:'.sss' }} <!-- .995 --><br/>
+  <h3>String Formatting</h3>
+  1 am/pm character: {{ today | date:'a' }} <!-- AM --><br/>
+  2 4-digit time zone offset: {{ today | date:'Z' }} <!-- -0700 --><br/>
+  <h3>Some examples of custom date formatting:</h3>
+  1 {{ today | date:'MMM d, y' }} <!-- Aug 9, 2013 --><br/>
+  2 {{ today | date:'EEEE, d, M' }} <!-- Thursday, 9, 8 --><br/>
+  3 {{ today | date:'hh:mm:ss.sss' }} <!-- 12:09:02.995 --><br/>
+  <h2>Filter</h2>
+  {{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'e' }}<!-- ["Lerner","Likes","Eat"] --><br/>
+  {{ [{
+  'name': 'Ari',
+  'City': 'San Francisco',
+  'favorite food': 'Pizza'
+  }, {
+  'name': 'Nate',
+  'City': 'San Francisco',
+  'favorite food': 'indian food'
+  }] | filter:{'favorite food': 'Pizza'} }}
+  <!-- [{"name":"Ari","City":"San Francisco","favorite food":"Pizza"}] --><br/>
+  {{ ['Ari', 'likes', 'to', 'travel'] | filter:isCapitalized }}<!-- ["Ari"] --><br/>
+  {{ {'name': 'Ari', 'City': 'San Francisco'} | json }}<!--
+                                                          {
+                                                            "name": "Ari",
+                                                            "City": "San Francisco"
+                                                          }
+                                                          --><br/>
+  {{ "San Francisco is very cloudy" | limitTo:3 }}<!-- San --><br/>
+  {{ "San Francisco is very cloudy" | limitTo:-6 }}<!-- cloudy --><br/>
+  {{ ['a', 'b', 'c', 'd', 'e', 'f'] | limitTo:1 }} <!-- ["a"] --><br/>
+  {{ "San Francisco is very cloudy" | lowercase }}<!-- san francisco is very cloudy --><br/>
+  {{ 123456789 | number }}<!-- 1,234,567,890 --><br/>
+  {{ 1.234567 | number:2 }}<!-- 1.23 --><br/>
+
+  {{ [{
+  'name': 'Ari',
+  'status': 'awake'
+  }, {
+  'name': 'Q',
+  'status': 'sleeping'
+  }, {
+  'name': 'Nate',
+  'status': 'awake'
+  }] | orderBy: 'name' }}<!--
+ [
+ {"name":"Q","status":"sleeping"},
+ {"name":"Nate","status":"awake"},
+ {"name":"Ari","status":"awake"}
+ ]
+ --><br />
+  {{ "San Francisco is very cloudy" | uppercase }}<!-- SAN FRANCISCO IS VERY CLOUDY -->
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
