@@ -6,7 +6,25 @@
 </head>
 <body>
 <div ng-controller="MyController">
-
+  <form name="form" novalidate>
+    <xmp><input type="email" name="email" ng-model="email" placeholder="Email Address"></xmp><input type="email" name="a" ng-model="a" placeholder="Email Address">{{a}}<br/>
+    <xmp><input type="text" required/></xmp><input type="text" ng-model="b" name="b" required/>{{b}}<br/>
+    <xmp><input type="text" ng-minlength=5/></xmp><input type="text" ng-model="c" name="c" ng-minlength=5 />{{c}}<br/>
+    <xmp><input type="text" ng-maxlength=20/></xmp><input type="text" ng-model="d" name="d" ng-maxlength=20 />{{d}}<br/>
+    <xmp><input type="text" ng-pattern="[a-zA-Z]"/></xmp><input type="text" ng-model="e" name="e" ng-pattern=/[a-zA-Z]/ />{{e}}<br/>
+    <xmp><input type="email" name="email" ng-model="user.email"/></xmp><input type="email" name="f" ng-model="f" />{{f}}<br/>
+    <xmp><input type="number" name="age" ng-model="user.age"/></xmp><input type="number" name="g" ng-model="g" />{{g}}<br/>
+    <xmp><input type="url" name="homepage" ng-model="user.facebook_url"/></xmp><input type="url" name="h" ng-model="h" />{{h}}<br/>
+    <xmp><input type="url" name="i" ng-model="i" one-to-ten="i" /></xmp><input type="url" name="i" ng-model="i" one-to-ten />{{i}}<br/>
+  </form>
+  <pre>{{ form | json}}</pre>
+  <p>
+    formName.inputFieldName.$pristine<br />
+    formName.inputFieldName.$dirty<br />
+    formName.inputFieldName.$valid<br />
+    formName.inputFieldName.$invalid<br />
+    formName.inputfieldName.$error<br />
+  </p>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 <script src="script.js"></script>
