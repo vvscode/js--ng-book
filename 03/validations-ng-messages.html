@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NgBookAppNpMessages">
+<head>
+  <meta charset="UTF-8">
+  <title>Forms</title>
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <form name="signup_form" novalidate ng-submit="signupForm()" ng-controller="signupController">
+    <fieldset>
+      <legend>Signup</legend>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Your name</label>
+          <input type="text"
+                 placeholder="Name"
+                 name="name"
+                 ng-model="signup.name"
+                 ng-minlength=3
+                 ng-maxlength=20
+                 ng-class="{error: signup_form.name.$dirty && signup_form.name.$invalid}"
+                 required/>
+          <div class="error"  ng-messages="signup_form.name.$error">
+            <div ng-message="required">Your name is required.</div>
+            <div ng-message="minlength">Your name is required to be at least 3 characters</div>
+            <div ng-message="maxlength">Your name cannot be longer than 20 characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Your email</label>
+          <input type="email"
+                 placeholder="Email"
+                 name="email"
+                 ng-model="signup.email"
+                 ng-minlength=3 ng-maxlength=20
+                 ng-class="{error: signup_form.name.$dirty && signup_form.name.$invalid}"
+                 required/>
+          <div class="error"  ng-messages="signup_form.email.$error" ng-messages-multiple>
+             <div ng-messages-include="errors/email.html"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="large-12 columns">
+        <label>Username</label>
+        <input type="text"
+               placeholder="Desired username"
+               name="username"
+               ng-model="signup.username"
+               ng-minlength=3
+               ng-maxlength=20
+               ng-class="{error: signup_form.name.$dirty && signup_form.name.$invalid}"
+               ensure-unique="username" required/>
+          <div class="error"  ng-messages="signup_form.username.$error" ng-messages-multiple>
+          <div ng-message="required">Please input a username</div>
+          <div ng-message="minlength">Your username is required to be at least 3 characters</div>
+          <div ng-message="maxlength">Your username cannot be longer than 20 characters</div>
+          <div ng-message="unique">That username is taken, please try another</div>
+        </div>
+      </div>
+
+      <button type="submit" class="button radius">Submit</button>
+    </fieldset>
+    <xmp>{{signup_form | json }}</xmp>
+  </form>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.8/angular-messages.min.js"></script>
+<script src="script.js"></script>
+  <script type="text/ng-template" id="errors/email.html">
+    <div ng-message="required"> Your email is required.</div>
+    <div ng-message="minlength">Your email is required to be at least 3 characters</div>
+    <div ng-message="email"> That is not a valid email. Please input a valid email.</div>
+    <div ng-message="maxlength"> Your email cannot be longer than 20 characters</div>
+  </script>
+</body>
+</html>
