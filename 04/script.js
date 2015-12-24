@@ -3,7 +3,11 @@ angular.module('NgBookApp', [])
     return {
       restrict: 'EAC',
       replace: true,
-      template: '<a href="http://google.com">Click me to go to Google </a>'
+      template: '<a href="{{myUrl}}">{{myLinkText}}</a>',
+      scope: {
+        myUrl: '@', // binding strategy
+        myLinkText: '@myCustomLinkText'
+      }
     }
   })
   .run(function($rootScope) {
