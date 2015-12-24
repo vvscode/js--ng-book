@@ -6,8 +6,23 @@
 </head>
 <body>
 <div ng-controller="MyController">
-<my-directive></my-directive><div my-directive></div>
-  <hr />
+  <my-directive></my-directive>
+  <div my-directive></div>
+  <hr/>
+  <p>We can access: {{ rootProperty }}</p>
+  <div ng-controller="ParentController">
+    <p>We can access: {{ rootProperty }}
+      and {{ parentProperty }}</p>
+    <div ng-controller="ChildController">
+      <p>
+        We can access:
+        {{ rootProperty }} and
+        {{ parentProperty }} and
+        {{ childProperty }}
+      </p>
+      <p>{{ fullSentenceFromChild }}</p>
+    </div>
+  </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 <script src="script.js"></script>
