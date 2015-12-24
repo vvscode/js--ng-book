@@ -3,7 +3,7 @@ angular.module('NgBookApp', [])
     return {
       restrict: 'EAC',
       replace: true,
-      template: '<a href="{{myUrl}}">{{myLinkText}}</a>',
+      template: '<div><input ng-model="myUrl" /><a href="{{myUrl}}">{{myLinkText}}</a></div>',
       scope: {
         myUrl: '@', // binding strategy
         myLinkText: '@myCustomLinkText'
