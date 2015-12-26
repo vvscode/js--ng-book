@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NgBookApp">
+<head>
+  <meta charset="UTF-8">
+  <title>NG-book: ng-lifecycle</title>
+</head>
+<body>
+<div ng-controller="MyController">
+  <h3>Ng life cycle</h3>
+<ol>
+  <li>Compile phase
+    <p>The first is called the compile phase. During the compile phase, Angular slurps up our
+      initial HTML page and begins processing the directives we declared according to the directive
+      definitions we’ve defined within our application’s JavaScript.</p>
+  <xmp>
+    // ...
+    compile: function(tEle, tAttrs, transcludeFn) {
+      var tplEl = angular.element('<div> <h2></h2></div>');
+      var h= tplEl.find('h2');
+      h2.attr('type', tAttrs.type);
+      h2.attr('ng-model', tAttrs.ngModel);
+      h2.val("hello");
+      tEle.replaceWith(tplEl);
+      return function(scope, ele, attrs) {
+        // The link function
+      }
+    }
+    // ...
+  </xmp>
+  </li>
+  <li>Link
+    <p>The link function has control over the live data-bound DOM, and, as such, performance
+      considerations should be taken into account.</p>
+  <xmp>
+    angular.module('myApp' [])
+    .directive('myDirective', function() {
+      return {
+        pre: function(tElement, tAttrs, transclude) {
+          // executed before child elements are linked
+          // NOT safe to do DOM transformations here b/c the `link` function
+          // called afterward will fail to locate the elements for linking
+        },
+        post: function(scope, iElement, iAttrs, controller) {
+          // executed after the child elements are linked
+          // IS safe to do DOM transformations here
+          // same as the link function, if the compile option here we're
+          // omitted
+        }
+      }
+    });
+  </xmp>
+    or
+    <xmp>
+    angular.module('myApp' [])
+    .directive('myDirective', function() {
+      return {
+        link: function(scope, ele, attrs) {
+          return {
+            pre: function(tElement, tAttrs, transclude) {
+              // executed before child elements are linked
+              // NOT safe to DOM transformations here b/c the `link` function
+              // called afterward will fail to locate the elements for linking
+            },
+            post: function(scope, iElement, iAttrs, controller) {
+              // executed after the child elements are linked
+              // IS safe to do DOM transformations here
+              // same as the link function, if the compile option here we're
+              // omitted
+            }
+          }
+        }
+      }
+    });
+    </xmp>
+  </li>
+
+</ol>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
