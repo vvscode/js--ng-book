@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NgBookApp">
+<head>
+  <meta charset="UTF-8">
+  <title>NG-book</title>
+</head>
+<body>
+<div ng-controller="MyController">
+  <header>
+    <h1>Header</h1>
+  </header>
+  <div class="content">
+    <div ng-view></div>
+    <p>The ng-view directive is a terminal directive at a 1000 priority. Angular will not run
+      any directives on the element at a lower priority, which is most directives (i.e., all other
+      directives on the
+      <xmp>
+        <div ng-view></div>
+      </xmp>
+      element are meaningless).
+    </p>
+    <p>
+      The ngView directive follows these specific steps:
+    <ul>
+      <li>Any time the $routeChangeSuccess event is fired, the view will update</li>
+      <li>If there is a template associated with the current route:
+        <ul>
+          <li>Create a new scope</li>
+          <li>Remove the last view, which cleans up the last scope</li>
+          <li>Link the new scope and the new template</li>
+          <li>Link the controller to the scope, if specified in the routes</li>
+          <li>Emits the $viewContentLoaded event</li>
+          <li>Run the onload attribute function, if provided</li>
+        </ul>
+      </li>
+    </ul>
+
+
+    </p>
+  </div>
+  <footer>
+    <h5>Footer</h5>
+  </footer>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
