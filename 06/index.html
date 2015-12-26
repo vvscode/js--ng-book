@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="NgBookApp">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-">
   <title>NG-book: ng-lifecycle</title>
 </head>
 <body>
 <div ng-controller="MyController">
-  <h3>Ng life cycle</h3>
+<h>Ng life cycle</h>
 <ol>
   <li>Compile phase
     <p>The first is called the compile phase. During the compile phase, Angular slurps up our
@@ -15,11 +15,11 @@
   <xmp>
     // ...
     compile: function(tEle, tAttrs, transcludeFn) {
-      var tplEl = angular.element('<div> <h2></h2></div>');
-      var h= tplEl.find('h2');
-      h2.attr('type', tAttrs.type);
-      h2.attr('ng-model', tAttrs.ngModel);
-      h2.val("hello");
+      var tplEl = angular.element('<div> <h></h></div>');
+      var h= tplEl.find('h');
+      h.attr('type', tAttrs.type);
+      h.attr('ng-model', tAttrs.ngModel);
+      h.val("hello");
       tEle.replaceWith(tplEl);
       return function(scope, ele, attrs) {
         // The link function
@@ -75,8 +75,68 @@
   </li>
 
 </ol>
+<h>Angular module loading</h>
+  <ol>
+    <li>Configuration
+    <xmp>
+    angular.module('myApp', [])
+    .config(function($provide) {
+    });
+    </xmp>
+    cyntactic sugar
+    <xmp>
+       angular.module('myApp', [])
+       .factory('myFactory', function() {
+        var service = {};
+        return service;
+       })
+       .directive('myDirective', function() {
+        return {
+          template: '<button>Click me</button>'
+        }
+       })
+    </xmp>
+      is equalent
+    <xmp>
+       angular.module('myApp', [])
+       .config(function($provide, $compileProvider) {
+          $provide.factory('myFactory', function() {
+            var service = {};
+            return service;
+          });
+          $compileProvider.directive('myDirective',
+          function() {
+            return {
+              template: '<button>Click me</button>'
+            }
+          })
+       });
+    </xmp>
+    </li>
+    <li>Run Blocks
+      <p>Unlike the configuration blocks, run blocks are executed after the injector is created and are the
+        first methods that are executed in any Angular app.
+        Run blocks are the closest thing in Angular to the main method. The run block is code that is
+        typically hard to unit test and is related to the general app.</p>
+      <xmp>
+         angular.module('myApp', ['ngRoute'])
+         .run(function($rootScope, AuthService) { $rootScope.$on('$routeChangeStart',
+         function(evt, next, current) {
+            // If the user is NOT logged in
+            if (!AuthService.userLoggedIn()) {
+              if (next.templateUrl === "login.html") {
+                // Already heading to the login route so no need to redirect
+              } else {
+                $location.path('/login');
+              }
+            }
+          });
+         });
+      </xmp>
+    </li>
+  </ol>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/../angular.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
