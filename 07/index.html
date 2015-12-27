@@ -8,6 +8,25 @@
 <div ng-controller="MyController">
   <button ng-click="sayHello()">Hello</button>
 </div>
+<div ng-controller="ServiceController">
+  <label for="username">
+    Type in a GitHub username
+  </label>
+  <input type="text"
+         ng-model="username"
+         placeholder="Enter a GitHub username"/>
+  <ul>
+    <li ng-repeat="event in events">
+      <!--
+    event.actor and event.repo are returned
+    by the github API. To view the raw
+    API, uncomment the next line:
+    -->
+      <!-- {{ event | json }} -->
+      {{ event.actor.login }} {{ event.repo.name }}
+    </li>
+  </ul>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 <script src="script.js"></script>
 </body>
