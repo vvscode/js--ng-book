@@ -1,0 +1,7 @@
+> npm install protractor
+
+> ./node_modules/protractor/bin/webdriver-manager update --chrome
+
+> ./node_modules/protractor/bin/webdriver-manager start
+
+> cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js
